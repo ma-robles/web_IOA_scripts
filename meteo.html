@@ -1,18 +1,28 @@
-<p>
+<p
 <select id="sel_meteo" onchange="change_img()">
-  <option value="d1_meteo_CDMX.jpg">CDMX</option>
-  <option value="d1_meteo_Ciudad_Universitaria_UNAM_CDMX.jpg" selected>Ciudad Universitaria CDMX</option>
-  <option value="d1_meteo_Acapulco_Gro.jpg"> Acapulco, Gro.</option>
 </select>
 </p>
-<script>
-  var i=0;
-  var time=1500;
-  var images=[];
 
-urlbase="https://pronosticos.atmosfera.unam.mx/WRF/actuales/d1_meteo/"
-hoy = new Date();
-function formatDate(date) {
+<script>
+  var urlbase="https://pronosticos.atmosfera.unam.mx/WRF/actuales/d1_meteo/";
+  var hoy = new Date()-1000*60*50;
+  var sites=["d1_meteo_CDMX.jpg",
+      "d1_meteo_Ciudad_Universitaria_UNAM_CDMX.jpg",
+      "d1_meteo_Mexicali_BC.jpg",
+      ];
+  var names=["CDMX",
+      "Ciudad Universitaria CDMX",
+      "Mexicali",
+      ]
+  var sel_meteo=document.getElementById("sel_meteo");
+  for (var i = 0; i < sites.length; i++) {
+    var option = document.createElement("option");
+    option.value = sites[i];
+    option.text = names[i];
+    sel_meteo.appendChild(option);
+  }
+
+  function formatDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
@@ -24,13 +34,12 @@ function formatDate(date) {
         day = '0' + day;
 
     return [year, month, day].join('_');
-}
-var sel_meteo=document.getElementById("sel_meteo");
+  }
 
   function change_img(){
-url_cmp=urlbase+formatDate(hoy)+'_00/'+
-sel_meteo.value;
-console.log(url_cmp);
+    url_cmp=urlbase+formatDate(hoy)+'_00/'+
+    sel_meteo.value;
+    console.log(url_cmp);
     document.slide_fcast.src=url_cmp;
 
   }
