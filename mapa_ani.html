@@ -1,0 +1,22 @@
+<script>
+  var i=0;
+  var time=1500;
+  var images=[];
+  images[0]="https://pronosticos.atmosfera.unam.mx/img_forecast/t_prnm_000.png"
+images[1]="https://pronosticos.atmosfera.unam.mx/img_forecast/t_prnm_001.png"
+images[2]="https://pronosticos.atmosfera.unam.mx/img_forecast/t_prnm_002.png"
+images[3]="https://pronosticos.atmosfera.unam.mx/img_forecast/t_prnm_003.png"
+images[4]="https://pronosticos.atmosfera.unam.mx/img_forecast/t_prnm_004.png"
+
+  function change_img(){
+    document.slide_fcast.src=images[i];
+    if(i<images.length-1){
+      i++;
+    } else{
+    i=0;
+    }
+    setTimeout("change_img()", time);
+  }
+  window.onload=change_img;
+</script>
+<img name="slide_fcast" width="500" height="400">

@@ -1,0 +1,39 @@
+<p>
+<select id="sel_meteo" onchange="change_img()">
+  <option value="d1_meteo_CDMX.jpg">CDMX</option>
+  <option value="d1_meteo_Ciudad_Universitaria_UNAM_CDMX.jpg" selected>Ciudad Universitaria CDMX</option>
+  <option value="d1_meteo_Acapulco_Gro.jpg"> Acapulco, Gro.</option>
+</select>
+</p>
+<script>
+  var i=0;
+  var time=1500;
+  var images=[];
+
+urlbase="https://pronosticos.atmosfera.unam.mx/WRF/actuales/d1_meteo/"
+hoy = new Date();
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('_');
+}
+var sel_meteo=document.getElementById("sel_meteo");
+
+  function change_img(){
+url_cmp=urlbase+formatDate(hoy)+'_00/'+
+sel_meteo.value;
+console.log(url_cmp);
+    document.slide_fcast.src=url_cmp;
+
+  }
+  window.onload=change_img;
+</script>
+<img name="slide_fcast" width="512" height="512">
